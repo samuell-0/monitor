@@ -1,0 +1,100 @@
+import { Button, VerticalBox, Slider, HorizontalBox, GridBox, GroupBox } from "std-widgets.slint";
+
+component _Time {
+        Text {
+            text: "4:13AM";
+            color: wheat;
+            font-size: 22px;
+        }
+}
+
+component _Graph inherits Rectangle  {
+
+        in property <int> usage;
+        in property <string> name;
+        VerticalBox {
+            Text {
+                text: "name: \{root.name}";
+            }
+            Text {
+                text: "usage: \{root.usage}";
+            }
+        }
+
+        background: #a9b8c7;
+        border-radius: 7px;
+}
+component _Slide inherits Rectangle {
+        drop-shadow-blur: 10px;
+
+        background: #292c2f;
+        border-radius: 7px;
+        Slider {
+
+        }
+}
+component _Bottons inherits Rectangle  {
+        drop-shadow-blur: 10px;
+
+        background: #292c2f;
+        border-radius: 7px;
+        height: 100px;
+}
+export component AppWindow inherits Window {
+    in property <int> cpu_usage;
+    in property <int> mem_usage;
+
+    full-screen: false;
+    no-frame: false;
+    width: 800px;
+    height: 510px;
+    
+    callback request-increase-value();
+    Rectangle {
+        drop-shadow-blur: 10px;
+
+        // img := Image {
+        //     source: @image-url("/home/eio/jb2euj3mmpvg1.jpeg");
+        // }
+        background: #202124;
+        border-color: #ececec;
+        border-width: 1px;
+        border-radius: 7px;
+
+        VerticalBox {
+            HorizontalBox {
+                VerticalBox {
+                    width: parent.width * 0.4;
+                    _Time {}
+                    _Graph {
+                        usage: cpu_usage;
+                        name: "cpu";
+                    }
+                    _Graph {
+                        usage: mem_usage;
+                        name: "mem";
+                    }
+                }
+                VerticalBox {
+                    _Slide {}
+                    _Bottons {}
+                }
+            }
+            Rectangle {
+                    height: parent.height * 0.1;
+
+                Rectangle {
+                    background: #4a4d51;
+                    border-radius: 3px;
+                    width: parent.width * 0.6;
+                    x: parent.x + (parent.width - self.width) / 2;
+                    
+                    TextInput {
+                        font-size: 16px;
+                        text: "$";
+                    }
+                }
+            }
+        }
+    }
+}

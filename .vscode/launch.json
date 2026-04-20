@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug monitor",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/monitor",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/debug",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "build-debug"
+    },
+    {
+      "name": "Release monitor",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/release/monitor",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/release",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "build-release"
+    }
+  ]
+}
