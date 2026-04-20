@@ -1,0 +1,6 @@
+[submodule "Graph"]
+	path = Graph
+	url = https://github.com/samuell-0/Graph
+[submodule "lib_sys"]
+	path = lib_sys
+	url = https://github.com/samuell-0/lib_sys
