@@ -4,9 +4,11 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/src",
+                "${workspaceFolder}/lib_sys/include",
+                "${workspaceFolder}/Graph/include",
                 "${workspaceFolder}/build/debug",
-                "${workspaceFolder}/build/debug/**",
-                "/usr/include/slint"
+                "${workspaceFolder}/build/debug/**"
+                // , "/usr/include/slint"
             ],
             "intelliSenseMode": "linux-gcc-x64"
         }
