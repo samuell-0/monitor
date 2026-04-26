@@ -1,20 +1,34 @@
-import { Button, VerticalBox, Slider, HorizontalBox } from "std-widgets.slint";
+import { Button, VerticalBox, Slider, HorizontalBox, GridBox, TextEdit } from "std-widgets.slint";
 
 component _Time {
     Rectangle {
-        background: @linear-gradient(135deg, #c9ccdb 0%, #311a48 100%);
-        border-radius: 12px;
-        drop-shadow-blur: 20px;
-        drop-shadow-color: #667eea40;
-        drop-shadow-offset-y: 4px;
+        background: #1a1a2e80;
+        border-radius: 16px;
+        border-width: 1px;
+        border-color: #00fff780;
+        drop-shadow-blur: 30px;
+        drop-shadow-color: #00fff740;
+        drop-shadow-offset-y: 0px;
 
-        Text {
-            text: "4:13AM";
-            color: #ffffff;
-            font-size: 28px;
-            font-weight: 700;
-            horizontal-alignment: center;
-            vertical-alignment: center;
+        VerticalBox {
+            padding: 0px;
+            alignment: center;
+            
+            Text {
+                text: "4:13AM";
+                color: #00fff7;
+                font-size: 32px;
+                font-weight: 300;
+                horizontal-alignment: center;
+            }
+            
+            Text {
+                text: "Sunday, April 26";
+                color: #ffffff80;
+                font-size: 12px;
+                font-weight: 300;
+                horizontal-alignment: center;
+            }
         }
     }
 }
@@ -23,44 +37,44 @@ component _Graph inherits Rectangle {
     in property <image> image;
     in property <string> label: "USAGE";
     in property <string> value: "0%";
-    in property <color> accent-color: #667eea;
+    in property <color> accent-color: #00fff7;
 
-    background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
-    border-radius: 16px;
-    drop-shadow-blur: 25px;
-    drop-shadow-color: #00000050;
-    drop-shadow-offset-y: 8px;
+    background: #16213e60;
+    border-radius: 20px;
     border-width: 1px;
-    border-color: #ffffff08;
+    border-color: root.accent-color.with-alpha(0.6);
+    drop-shadow-blur: 25px;
+    drop-shadow-color: root.accent-color.with-alpha(0.3);
+    drop-shadow-offset-y: 0px;
 
     VerticalBox {
-        padding: 20px;
-        spacing: 12px;
+        padding: 5px;
+        spacing: 0px;
 
         HorizontalBox {
             alignment: space-between;
 
             Text {
                 text: root.label;
-                color: #9ca3af;
-                font-size: 13px;
+                color: #ffffff90;
+                font-size: 10px;
                 font-weight: 600;
-                letter-spacing: 1.5px;
+                letter-spacing: 2px;
             }
 
             Text {
                 text: root.value;
                 color: root.accent-color;
-                font-size: 16px;
-                font-weight: 700;
+                font-size: 10px;
+                font-weight: 300;
             }
         }
 
         Rectangle {
-            background: #16181d;
-            border-radius: 12px;
+            background: #0a0e1b80;
+            border-radius: 14px;
             border-width: 1px;
-            border-color: root.accent-color.with-alpha(0.18);
+            border-color: root.accent-color.with-alpha(0.4);
             clip: true;
 
             Image {
@@ -68,269 +82,263 @@ component _Graph inherits Rectangle {
                 width: parent.width;
                 height: parent.height;
                 image-fit: fill;
+                opacity: 0.8;
             }
 
             Rectangle {
-                background: @linear-gradient(180deg, transparent 0%, root.accent-color.with-alpha(0.1) 100%);
+                background: @linear-gradient(180deg, transparent 60%, root.accent-color.with-alpha(0.3) 100%);
             }
         }
     }
 }
 
 component _Slide inherits Rectangle {
-    drop-shadow-blur: 25px;
-    drop-shadow-color: #00000050;
-    drop-shadow-offset-y: 8px;
-    background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
-    border-radius: 16px;
+    background: #16213e60;
+    border-radius: 20px;
     border-width: 1px;
-    border-color: #ffffff08;
+    border-color: #ff006e60;
+    drop-shadow-blur: 25px;
+    drop-shadow-color: #ff006e30;
+    drop-shadow-offset-y: 0px;
+
+    height: 150px;
 
     VerticalBox {
-        padding: 24px;
-        spacing: 16px;
+        padding: 20px;
+        spacing: 10px;
 
-        Text {
-            text: "BRIGHTNESS";
-            color: #9ca3af;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+        VerticalBox {
+            spacing: 0px;
+            padding: 0px;
+            HorizontalBox {
+                padding: 0px;
+                alignment: space-between;
+                
+                Text {
+                    text: "BRIGHTNESS";
+                    color: #ffffff90;
+                    font-size: 10px;
+                    font-weight: 600;
+                    letter-spacing: 2px;
+                }
+                
+                Text {
+                    text: "75%";
+                    color: #ff006e;
+                    font-size: 14px;
+                    font-weight: 300;
+                }
+            }
+
+            Slider {
+                value: 75;
+                maximum: 100;
+                minimum: 0;
+            }
         }
+        
+        VerticalBox {
+            spacing: 0px;
+            padding: 0px;
+            
+            HorizontalBox {
+                padding: 0px;
+                alignment: space-between;
+                
+                Text {
+                    text: "OPACITY";
+                    color: #ffffff90;
+                    font-size: 10px;
+                    font-weight: 600;
+                    letter-spacing: 2px;
+                }
+                
+                Text {
+                    text: "85%";
+                    color: #ff006e;
+                    font-size: 14px;
+                    font-weight: 300;
+                }
+            }
 
-        Slider {
-            value: 75;
-            maximum: 100;
-            minimum: 0;
-        }
-
-        Text {
-            text: "VOLUME";
-            color: #9ca3af;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-        }
-
-        Slider {
-            value: 60;
-            maximum: 100;
-            minimum: 0;
+            Slider {
+                value: 85;
+                maximum: 100;
+                minimum: 0;
+            }
         }
     }
 }
 
 component _Bottons inherits Rectangle {
-    drop-shadow-blur: 25px;
-    drop-shadow-color: #00000050;
-    drop-shadow-offset-y: 8px;
-    background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
+
+        in property <string> name;
+        in property <color> _color_1: #ff006e;
+        in property <color> _color_2: #ff006e;
+
+        in property <float> d;
+
+        background: @linear-gradient(135deg, _color_1 0%, _color_2 100%);
+        border-radius: 14px;
+        border-width: 1px;
+        border-color: #ffffff40;
+        drop-shadow-blur: 20px;
+        drop-shadow-color: #ff006e50;
+
+        TouchArea {
+            clicked => { 
+                if (d <= 0.5)
+                {
+                    // animation-tick()->
+                }
+             }
+        }
+
+        VerticalBox {
+            alignment: center;
+            spacing: 0px;
+            padding: 0px;
+
+            Text {
+                text: "󰓅";
+                font-size: 20px;
+                color: #ffffff;
+                horizontal-alignment: center;
+            }
+
+            Text {
+                text: root.name;
+                color: #ffffffd0;
+                font-size: 9px;
+                font-weight: 600;
+                letter-spacing: 1.5px;
+                horizontal-alignment: center;
+            }
+        }
+}
+component dynamic_widgets inherits Rectangle {
+        in-out property <float> _horizontal_stretch;
+
+        background: #16213e60;
+        border-radius: 20px;
+        border-width: 1px;
+        border-color: #8338ec60;
+        drop-shadow-blur: 25px;
+        drop-shadow-color: #8338ec30;
+        drop-shadow-offset-y: 0px;
+
+        GridLayout {
+            spacing: 5px;
+            padding: 5px;
+            Button {
+                text: "touch me lol";
+                clicked => {
+                    _horizontal_stretch += 30;
+                }
+
+            }
+            _Bottons {
+                _color_1: #6989aa;
+                _color_2: #898959;
+            }
+            // _Bottons {
+            //     _color_1: #6989aa;
+            //     _color_2: #1f1932;
+            // }
+        }
+}
+component  terminal_emulator inherits Rectangle {
+    height: 40px;
+    background: #16213e60;
     border-radius: 16px;
     border-width: 1px;
-    border-color: #ffffff08;
-    height: 140px;
-
+    border-color: #00fff760;
+    drop-shadow-blur: 25px;
+    drop-shadow-color: #00fff730;
     HorizontalBox {
-        padding: 20px;
+        padding: 5px;
         spacing: 12px;
-        alignment: center;
+        horizontal-stretch: 1;
 
-        Rectangle {
-            horizontal-stretch: 1;
-            background: @linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 12px;
-            drop-shadow-blur: 15px;
-            drop-shadow-color: #f5576c40;
-            drop-shadow-offset-y: 4px;
-
-            TouchArea {
-                clicked => { /* action */ }
-            }
-
-            VerticalBox {
-                alignment: center;
-
-                Text {
-                    text: "⚡";
-                    font-size: 32px;
-                    horizontal-alignment: center;
-                }
-
-                Text {
-                    text: "BOOST";
-                    color: #ffffff;
-                    font-size: 11px;
-                    font-weight: 700;
-                    letter-spacing: 1px;
-                    horizontal-alignment: center;
-                }
-            }
+        Text {
+            text: "$";
+            color: #00fff7;
+            font-size: 15px;
+            font-weight: 300;
+            vertical-alignment: center;
         }
 
-        Rectangle {
-            horizontal-stretch: 1;
-            background: @linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            border-radius: 12px;
-            drop-shadow-blur: 15px;
-            drop-shadow-color: #00f2fe40;
-            drop-shadow-offset-y: 4px;
-
-            TouchArea {
-                clicked => { /* action */ }
-            }
-
-            VerticalBox {
-                alignment: center;
-
-                Text {
-                    text: "❄";
-                    font-size: 32px;
-                    horizontal-alignment: center;
-                }
-
-                Text {
-                    text: "COOL";
-                    color: #ffffff;
-                    font-size: 11px;
-                    font-weight: 700;
-                    letter-spacing: 1px;
-                    horizontal-alignment: center;
-                }
-            }
-        }
-
-        Rectangle {
-            horizontal-stretch: 1;
-            background: @linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            border-radius: 12px;
-            drop-shadow-blur: 15px;
-            drop-shadow-color: #fee14040;
-            drop-shadow-offset-y: 4px;
-
-            TouchArea {
-                clicked => { /* action */ }
-            }
-
-            VerticalBox {
-                alignment: center;
-
-                Text {
-                    text: "⚙";
-                    font-size: 32px;
-                    horizontal-alignment: center;
-                }
-
-                Text {
-                    text: "CONFIG";
-                    color: #ffffff;
-                    font-size: 11px;
-                    font-weight: 700;
-                    letter-spacing: 1px;
-                    horizontal-alignment: center;
-                }
-            }
+        TextInput {
+            horizontal-stretch: 0.9;
+            text: "neofetch";
+            font-size: 13px;
+            color: #ffffffd0;
+            vertical-alignment: center;
+            horizontal-alignment: left;
         }
     }
 }
-
 export component AppWindow inherits Window {
     in property <image> cpu_usage;
     in property <image> mem_usage;
 
+    in-out property <float> _horizontal_stretch: 0.3;
+
     full-screen: false;
     no-frame: true;
-    width: 880px;
-    height: 600px;
+    width: 800px;
+    height: 500px;
     
     callback request-increase-value();
 
     Rectangle {
-        background: @linear-gradient(135deg, #c7c5dc 0%, #363453 50%, #646496 100%);
-        border-color: #667eea60;
-        border-width: 2px;
-        border-radius: 20px;
-        drop-shadow-blur: 40px;
-        drop-shadow-color: #e0bbbb80;
+        Image {
+            source: @image-url("../resources/3.jpg");
+            width: parent.width;
+            height: parent.height;
+            image-fit: cover;
+        }
+        
+        // Blur overlay
+        Rectangle {
+            background: #181f387d;
+        }
 
         VerticalBox {
-            padding: 32px;
-            spacing: 20px;
+            padding: 20px;
+            spacing: 24px;
 
             HorizontalBox {
-                spacing: 24px;
+                spacing: 28px;
 
                 VerticalBox {
-                    width: parent.width * 0.45;
-                    spacing: 20px;
+                    // horizontal-stretch: 0.6;
+                    width: parent.width * 0.5;
+                    spacing: 10px;
 
                     _Time {}
                     
                     _Graph {
                         image: @image-url("../resources/d.png");
-                        label: "CPU USAGE";
+                        label: "CPU";
                         value: "67%";
-                        accent-color: #667eea;
+                        accent-color: #00fff7;
                     }
-                    
                     _Graph {
                         image: @image-url("../resources/d.png");
                         label: "MEMORY";
-                        value: "8.2 GB";
-                        accent-color: #f093fb;
+                        value: "8.2GB";
+                        accent-color: #00fff7;
                     }
                 }
                 
                 VerticalBox {
-                    spacing: 20px;
+                    spacing: 12px;
                     _Slide {}
-                    _Bottons {}
+                    dynamic_widgets{}
                 }
             }
-            
-            Rectangle {
-                height: 70px;
-                background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
-                border-radius: 16px;
-                drop-shadow-blur: 25px;
-                drop-shadow-color: #00000050;
-                drop-shadow-offset-y: 8px;
-                border-width: 1px;
-                border-color: #ffffff08;
-
-                HorizontalBox {
-                    padding: 16px;
-                    alignment: center;
-
-                    Rectangle {
-                        width: parent.width * 0.7;
-                        background: #16181d;
-                        border-radius: 10px;
-                        border-width: 2px;
-                        border-color: #667eea40;
-
-                        HorizontalBox {
-                            padding-left: 16px;
-                            padding-right: 16px;
-                            alignment: start;
-
-                            Text {
-                                text: "$";
-                                color: #667eea;
-                                font-size: 18px;
-                                font-weight: 700;
-                                vertical-alignment: center;
-                            }
-
-                            TextInput {
-                                font-size: 16px;
-                                color: #ffffff;
-                                vertical-alignment: center;
-                                horizontal-alignment: left;
-                            }
-                        }
-                    }
-                }
-            }
+            terminal-emulator {}
         }
     }
 }
