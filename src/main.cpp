@@ -14,15 +14,15 @@ struct usr_data
 void update_stats(void* usr_data_ptr)
 {
     struct usr_data* _usr_data_ptr = (struct usr_data*)usr_data_ptr;
-    if (_usr_data_ptr->ui_ptr != NULL)
-        slint::invoke_from_event_loop([_usr_data_ptr]()
-            {
-                (*_usr_data_ptr->ui_ptr)->
-                    set_cpu_usage(_usr_data_ptr->log_data_ptr->cpu_info_ptr->usage_percent);
-                (*_usr_data_ptr->ui_ptr)->
-                    set_mem_usage(_usr_data_ptr->log_data_ptr->mem_info_ptr->usage_percent);
-            }
-        );
+    // if (_usr_data_ptr->ui_ptr != NULL)
+    //     slint::invoke_from_event_loop([_usr_data_ptr]()
+    //         {
+    //             (*_usr_data_ptr->ui_ptr)->
+    //                 set_cpu_usage(_usr_data_ptr->log_data_ptr->cpu_info_ptr->usage_percent);
+    //             (*_usr_data_ptr->ui_ptr)->
+    //                 set_mem_usage(_usr_data_ptr->log_data_ptr->mem_info_ptr->usage_percent);
+    //         }
+    //     );
 }
 int main(int argc, char **argv)
 {

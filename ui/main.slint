@@ -1,97 +1,333 @@
-import { Button, VerticalBox, Slider, HorizontalBox, GridBox, GroupBox } from "std-widgets.slint";
+import { Button, VerticalBox, Slider, HorizontalBox } from "std-widgets.slint";
 
 component _Time {
+    Rectangle {
+        background: @linear-gradient(135deg, #c9ccdb 0%, #311a48 100%);
+        border-radius: 12px;
+        drop-shadow-blur: 20px;
+        drop-shadow-color: #667eea40;
+        drop-shadow-offset-y: 4px;
+
         Text {
             text: "4:13AM";
-            color: wheat;
-            font-size: 22px;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            horizontal-alignment: center;
+            vertical-alignment: center;
         }
+    }
 }
 
-component _Graph inherits Rectangle  {
+component _Graph inherits Rectangle {
+    in property <image> image;
+    in property <string> label: "USAGE";
+    in property <string> value: "0%";
+    in property <color> accent-color: #667eea;
 
-        in property <int> usage;
-        in property <string> name;
-        VerticalBox {
+    background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
+    border-radius: 16px;
+    drop-shadow-blur: 25px;
+    drop-shadow-color: #00000050;
+    drop-shadow-offset-y: 8px;
+    border-width: 1px;
+    border-color: #ffffff08;
+
+    VerticalBox {
+        padding: 20px;
+        spacing: 12px;
+
+        HorizontalBox {
+            alignment: space-between;
+
             Text {
-                text: "name: \{root.name}";
+                text: root.label;
+                color: #9ca3af;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: 1.5px;
             }
+
             Text {
-                text: "usage: \{root.usage}";
+                text: root.value;
+                color: root.accent-color;
+                font-size: 16px;
+                font-weight: 700;
             }
         }
 
-        background: #a9b8c7;
-        border-radius: 7px;
+        Rectangle {
+            background: #16181d;
+            border-radius: 12px;
+            border-width: 1px;
+            border-color: root.accent-color.with-alpha(0.18);
+            clip: true;
+
+            Image {
+                source: root.image;
+                width: parent.width;
+                height: parent.height;
+                image-fit: fill;
+            }
+
+            Rectangle {
+                background: @linear-gradient(180deg, transparent 0%, root.accent-color.with-alpha(0.1) 100%);
+            }
+        }
+    }
 }
+
 component _Slide inherits Rectangle {
-        drop-shadow-blur: 10px;
+    drop-shadow-blur: 25px;
+    drop-shadow-color: #00000050;
+    drop-shadow-offset-y: 8px;
+    background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
+    border-radius: 16px;
+    border-width: 1px;
+    border-color: #ffffff08;
 
-        background: #292c2f;
-        border-radius: 7px;
-        Slider {
+    VerticalBox {
+        padding: 24px;
+        spacing: 16px;
 
+        Text {
+            text: "BRIGHTNESS";
+            color: #9ca3af;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
         }
-}
-component _Bottons inherits Rectangle  {
-        drop-shadow-blur: 10px;
 
-        background: #292c2f;
-        border-radius: 7px;
-        height: 100px;
+        Slider {
+            value: 75;
+            maximum: 100;
+            minimum: 0;
+        }
+
+        Text {
+            text: "VOLUME";
+            color: #9ca3af;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        Slider {
+            value: 60;
+            maximum: 100;
+            minimum: 0;
+        }
+    }
 }
+
+component _Bottons inherits Rectangle {
+    drop-shadow-blur: 25px;
+    drop-shadow-color: #00000050;
+    drop-shadow-offset-y: 8px;
+    background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
+    border-radius: 16px;
+    border-width: 1px;
+    border-color: #ffffff08;
+    height: 140px;
+
+    HorizontalBox {
+        padding: 20px;
+        spacing: 12px;
+        alignment: center;
+
+        Rectangle {
+            horizontal-stretch: 1;
+            background: @linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 12px;
+            drop-shadow-blur: 15px;
+            drop-shadow-color: #f5576c40;
+            drop-shadow-offset-y: 4px;
+
+            TouchArea {
+                clicked => { /* action */ }
+            }
+
+            VerticalBox {
+                alignment: center;
+
+                Text {
+                    text: "⚡";
+                    font-size: 32px;
+                    horizontal-alignment: center;
+                }
+
+                Text {
+                    text: "BOOST";
+                    color: #ffffff;
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    horizontal-alignment: center;
+                }
+            }
+        }
+
+        Rectangle {
+            horizontal-stretch: 1;
+            background: @linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 12px;
+            drop-shadow-blur: 15px;
+            drop-shadow-color: #00f2fe40;
+            drop-shadow-offset-y: 4px;
+
+            TouchArea {
+                clicked => { /* action */ }
+            }
+
+            VerticalBox {
+                alignment: center;
+
+                Text {
+                    text: "❄";
+                    font-size: 32px;
+                    horizontal-alignment: center;
+                }
+
+                Text {
+                    text: "COOL";
+                    color: #ffffff;
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    horizontal-alignment: center;
+                }
+            }
+        }
+
+        Rectangle {
+            horizontal-stretch: 1;
+            background: @linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 12px;
+            drop-shadow-blur: 15px;
+            drop-shadow-color: #fee14040;
+            drop-shadow-offset-y: 4px;
+
+            TouchArea {
+                clicked => { /* action */ }
+            }
+
+            VerticalBox {
+                alignment: center;
+
+                Text {
+                    text: "⚙";
+                    font-size: 32px;
+                    horizontal-alignment: center;
+                }
+
+                Text {
+                    text: "CONFIG";
+                    color: #ffffff;
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    horizontal-alignment: center;
+                }
+            }
+        }
+    }
+}
+
 export component AppWindow inherits Window {
-    in property <int> cpu_usage;
-    in property <int> mem_usage;
+    in property <image> cpu_usage;
+    in property <image> mem_usage;
 
     full-screen: false;
-    no-frame: false;
-    width: 800px;
-    height: 510px;
+    no-frame: true;
+    width: 880px;
+    height: 600px;
     
     callback request-increase-value();
-    Rectangle {
-        drop-shadow-blur: 10px;
 
-        // img := Image {
-        //     source: @image-url("/home/eio/jb2euj3mmpvg1.jpeg");
-        // }
-        background: #202124;
-        border-color: #ececec;
-        border-width: 1px;
-        border-radius: 7px;
+    Rectangle {
+        background: @linear-gradient(135deg, #c7c5dc 0%, #363453 50%, #646496 100%);
+        border-color: #667eea60;
+        border-width: 2px;
+        border-radius: 20px;
+        drop-shadow-blur: 40px;
+        drop-shadow-color: #e0bbbb80;
 
         VerticalBox {
+            padding: 32px;
+            spacing: 20px;
+
             HorizontalBox {
+                spacing: 24px;
+
                 VerticalBox {
-                    width: parent.width * 0.4;
+                    width: parent.width * 0.45;
+                    spacing: 20px;
+
                     _Time {}
+                    
                     _Graph {
-                        usage: cpu_usage;
-                        name: "cpu";
+                        image: @image-url("../resources/d.png");
+                        label: "CPU USAGE";
+                        value: "67%";
+                        accent-color: #667eea;
                     }
+                    
                     _Graph {
-                        usage: mem_usage;
-                        name: "mem";
+                        image: @image-url("../resources/d.png");
+                        label: "MEMORY";
+                        value: "8.2 GB";
+                        accent-color: #f093fb;
                     }
                 }
+                
                 VerticalBox {
+                    spacing: 20px;
                     _Slide {}
                     _Bottons {}
                 }
             }
+            
             Rectangle {
-                    height: parent.height * 0.1;
+                height: 70px;
+                background: @linear-gradient(145deg, #2a2d35 0%, #1f2128 100%);
+                border-radius: 16px;
+                drop-shadow-blur: 25px;
+                drop-shadow-color: #00000050;
+                drop-shadow-offset-y: 8px;
+                border-width: 1px;
+                border-color: #ffffff08;
 
-                Rectangle {
-                    background: #4a4d51;
-                    border-radius: 3px;
-                    width: parent.width * 0.6;
-                    x: parent.x + (parent.width - self.width) / 2;
-                    
-                    TextInput {
-                        font-size: 16px;
-                        text: "$";
+                HorizontalBox {
+                    padding: 16px;
+                    alignment: center;
+
+                    Rectangle {
+                        width: parent.width * 0.7;
+                        background: #16181d;
+                        border-radius: 10px;
+                        border-width: 2px;
+                        border-color: #667eea40;
+
+                        HorizontalBox {
+                            padding-left: 16px;
+                            padding-right: 16px;
+                            alignment: start;
+
+                            Text {
+                                text: "$";
+                                color: #667eea;
+                                font-size: 18px;
+                                font-weight: 700;
+                                vertical-alignment: center;
+                            }
+
+                            TextInput {
+                                font-size: 16px;
+                                color: #ffffff;
+                                vertical-alignment: center;
+                                horizontal-alignment: left;
+                            }
+                        }
                     }
                 }
             }
