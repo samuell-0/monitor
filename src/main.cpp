@@ -23,13 +23,13 @@ void update_stats(void* usr_data_ptr)
     if (_usr_data_ptr->ui_ptr != NULL)
         slint::invoke_from_event_loop([_usr_data_ptr]()
             {
-                // make_graph_path(_usr_data_ptr->cpuG_draw_cmd, _usr_data_ptr->log_data_ptr->cpu_info_ptr->usage_percent);
-                // (*_usr_data_ptr->ui_ptr)->
-                //     set_cpuG_draw_cmd(_usr_data_ptr->cpuG_draw_cmd);
-
-                make_graph_path(_usr_data_ptr->memG_draw_cmd, _usr_data_ptr->log_data_ptr->mem_info_ptr->usage_percent);
+                make_graph_path(_usr_data_ptr->cpuG_draw_cmd, _usr_data_ptr->log_data_ptr->cpu_info_ptr->arr_percentages);
                 (*_usr_data_ptr->ui_ptr)->
-                    set_memG_draw_cmd(_usr_data_ptr->cpuG_draw_cmd);
+                    set_cpuG_draw_cmd(_usr_data_ptr->cpuG_draw_cmd);
+
+                // make_graph_path(_usr_data_ptr->memG_draw_cmd, _usr_data_ptr->log_data_ptr->mem_info_ptr->usage_percent);
+                // (*_usr_data_ptr->ui_ptr)->
+                //     set_memG_draw_cmd(_usr_data_ptr->cpuG_draw_cmd);
             }
         );
 }
