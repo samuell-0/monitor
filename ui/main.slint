@@ -34,7 +34,7 @@ component _Time {
 }
 
 component _Graph inherits Rectangle {
-    in property <image> image;
+    in property <string> draw_cmd;
     in property <string> label: "USAGE";
     in property <string> value: "0%";
     in property <color> accent-color: #00fff7;
@@ -52,7 +52,6 @@ component _Graph inherits Rectangle {
         spacing: 0px;
 
         HorizontalBox {
-            alignment: space-between;
 
             Text {
                 text: root.label;
@@ -69,26 +68,38 @@ component _Graph inherits Rectangle {
                 font-weight: 300;
             }
         }
-
         Rectangle {
             background: #0a0e1b80;
             border-radius: 14px;
             border-width: 1px;
             border-color: root.accent-color.with-alpha(0.4);
-            clip: true;
+            // clip: true;
 
-            Image {
-                source: root.image;
-                width: parent.width;
-                height: parent.height;
-                image-fit: fill;
+            Path {
+                // width: 100%;
+                // height: 100%;
+                
+                // viewbox-x: 100;
+                // viewbox-y: -10;
+                viewbox-width: self.width / 1px;
+                viewbox-height: 100;
+                // transform-scale-x: self.width*0.95 / self.height;
+                
                 opacity: 0.8;
+                stroke: white;
+                
+                stroke-width: 1px;
+                
+                // commands: "M 0 100 l 200 -20 l 10 -30 l 10 -40 l 10 20 l 10 10 l 10 -22";
+                commands: "M 0 100" + root.draw_cmd;
             }
 
             Rectangle {
                 background: @linear-gradient(180deg, transparent 60%, root.accent-color.with-alpha(0.3) 100%);
             }
         }
+
+
     }
 }
 
@@ -170,52 +181,52 @@ component _Slide inherits Rectangle {
     }
 }
 
-component _Bottons inherits Rectangle {
+// component _Bottons inherits Rectangle {
 
-        in property <string> name;
-        in property <color> _color_1: #ff006e;
-        in property <color> _color_2: #ff006e;
+//         in property <string> name;
+//         in property <color> _color_1: #ff006e;
+//         in property <color> _color_2: #ff006e;
 
-        in property <float> d;
+//         in property <float> d;
 
-        background: @linear-gradient(135deg, _color_1 0%, _color_2 100%);
-        border-radius: 14px;
-        border-width: 1px;
-        border-color: #ffffff40;
-        drop-shadow-blur: 20px;
-        drop-shadow-color: #ff006e50;
+//         background: @linear-gradient(135deg, _color_1 0%, _color_2 100%);
+//         border-radius: 14px;
+//         border-width: 1px;
+//         border-color: #ffffff40;
+//         drop-shadow-blur: 20px;
+//         drop-shadow-color: #ff006e50;
 
-        TouchArea {
-            clicked => { 
-                if (d <= 0.5)
-                {
-                    // animation-tick()->
-                }
-             }
-        }
+//         TouchArea {
+//             clicked => { 
+//                 if (d <= 0.5)
+//                 {
+//                     // animation-tick()->
+//                 }
+//              }
+//         }
 
-        VerticalBox {
-            alignment: center;
-            spacing: 0px;
-            padding: 0px;
+//         VerticalBox {
+//             alignment: center;
+//             spacing: 0px;
+//             padding: 0px;
 
-            Text {
-                text: "󰓅";
-                font-size: 20px;
-                color: #ffffff;
-                horizontal-alignment: center;
-            }
+//             Text {
+//                 text: "󰓅";
+//                 font-size: 20px;
+//                 color: #ffffff;
+//                 horizontal-alignment: center;
+//             }
 
-            Text {
-                text: root.name;
-                color: #ffffffd0;
-                font-size: 9px;
-                font-weight: 600;
-                letter-spacing: 1.5px;
-                horizontal-alignment: center;
-            }
-        }
-}
+//             Text {
+//                 text: root.name;
+//                 color: #ffffffd0;
+//                 font-size: 9px;
+//                 font-weight: 600;
+//                 letter-spacing: 1.5px;
+//                 horizontal-alignment: center;
+//             }
+//         }
+// }
 component dynamic_widgets inherits Rectangle {
         in-out property <float> _horizontal_stretch;
 
@@ -227,27 +238,25 @@ component dynamic_widgets inherits Rectangle {
         drop-shadow-color: #8338ec30;
         drop-shadow-offset-y: 0px;
 
-        GridLayout {
-            spacing: 5px;
-            padding: 5px;
-            Button {
-                text: "touch me lol";
-                clicked => {
-                    _horizontal_stretch += 30;
-                }
+        Button {
+            text: "touch me lol";
+            clicked => {
+                _horizontal_stretch += 30;
+            }
 
-            }
-            _Bottons {
-                _color_1: #6989aa;
-                _color_2: #898959;
-            }
-            // _Bottons {
-            //     _color_1: #6989aa;
-            //     _color_2: #1f1932;
-            // }
         }
+        // _Bottons {
+        //     _color_1: #6989aa;
+        //     _color_2: #898959;
+        // }
+        // _Bottons {
+        //     _color_1: #6989aa;
+        //     _color_2: #1f1932;
+        // }
 }
 component  terminal_emulator inherits Rectangle {
+    in property <string> out_str;
+    out property <string> cmd_str;
     height: 40px;
     background: #16213e60;
     border-radius: 16px;
@@ -279,8 +288,10 @@ component  terminal_emulator inherits Rectangle {
     }
 }
 export component AppWindow inherits Window {
-    in property <image> cpu_usage;
-    in property <image> mem_usage;
+    // in property <image> cpu_usage;
+    // in property <image> mem_usage;
+    in property <string> cpuG_draw_cmd;
+    in property <string> memG_draw_cmd;
 
     in-out property <float> _horizontal_stretch: 0.3;
 
@@ -305,11 +316,11 @@ export component AppWindow inherits Window {
         }
 
         VerticalBox {
-            padding: 20px;
-            spacing: 24px;
+            padding: 10px;
+            spacing: 10px;
 
             HorizontalBox {
-                spacing: 28px;
+                spacing: 20px;
 
                 VerticalBox {
                     // horizontal-stretch: 0.6;
@@ -319,13 +330,13 @@ export component AppWindow inherits Window {
                     _Time {}
                     
                     _Graph {
-                        image: @image-url("../resources/d.png");
+                        draw_cmd: cpuG_draw_cmd;
                         label: "CPU";
                         value: "67%";
                         accent-color: #00fff7;
                     }
                     _Graph {
-                        image: @image-url("../resources/d.png");
+                        draw_cmd: memG_draw_cmd;
                         label: "MEMORY";
                         value: "8.2GB";
                         accent-color: #00fff7;

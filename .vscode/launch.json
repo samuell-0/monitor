@@ -28,6 +28,48 @@
       "MIMode": "gdb",
       "miDebuggerPath": "/usr/bin/gdb",
       "preLaunchTask": "build-release"
-    }
+    },
+    {
+      "name": "Test Debug graph",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/Graph/test_graph",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/debug",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "build-debug"
+    },
+    {
+      "name": "Test Debug lib_sys",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/lib_sys/test_lib_sys",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/debug",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "build-debug"
+    },
+    {
+      "name": "Debug blur",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/blur/test_blur",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/debug",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "build-debug"
+    },
   ]
 }
